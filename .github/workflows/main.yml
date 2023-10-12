@@ -1,0 +1,37 @@
+name: cicd_test
+
+# 특정상황에서 해당 cicd를 실행시키겠다는 의미
+on: 
+  # 해당 브랜치가 푸쉬 될 때 실행
+  push:
+    branches: 
+      - main
+  # 해당 브랜치가 풀 요청이 생길 때 실행
+  pull_request:
+    branches:
+      - main
+
+# 어떤 일을 할껀지
+jobs:
+  build:
+    # 운영체제
+    runs-on: unbuntu-lates
+
+    # 아래의 작업을 순서대로 실행
+    steps:
+    - name: checkout
+    # 깃 액션 양식
+    - uses: actions/checkout@v2
+
+    # 라이브러리 install
+    - name: build 
+      run: pip install -r requirements.txt
+
+    # 테스트 코드 실행
+    - name: test
+      run: python app.py test
+
+    # 배포
+    - name: deploy
+      run: python app.py
+      
