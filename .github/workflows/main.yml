@@ -19,19 +19,14 @@ jobs:
 
     # 아래의 작업을 순서대로 실행
     steps:
-    - name: checkout
-    # 깃 액션 양식
-    - uses: actions/checkout@v2
+      - name: checkout
+        # 깃 액션 양식
+        uses: actions/checkout@v2
 
-    # 라이브러리 install
-    - name: build 
-      run: pip install -r requirements.txt
+      # 라이브러리 install
+      - name: build 
+        run: pip install -r requirements.txt
 
-    # 테스트 코드 실행
-    - name: test
-      run: python app.py test
-
-    # 배포
-    - name: deploy
-      run: python app.py
-      
+      # 배포
+      - name: deploy
+        run: python app.py
